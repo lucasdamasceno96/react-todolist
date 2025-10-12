@@ -9,12 +9,7 @@ function App() {
     description: 'Need to go to the doctors at 5pm',
     isCompleted: false
   },
-  {
-    id: 2,
-    title: 'Meeting at School',
-    description: 'Meeting with the new client at school',
-    isCompleted: true
-  }])
+ ])
 
   function onTaskClick(taskId){
     const newTasks = tasks.map(task => {
@@ -29,14 +24,23 @@ function App() {
   const newTasks = tasks.filter(task => task.id !== taskId)
   setTasks(newTasks)
   }
+
+  function onAddTaskSubmit(title, description){
+    const newTask = {
+      id: Math.floor(Math.random() * 10000),
+      title: title,
+      description: description,
+      isCompleted: false
+    }
+    setTasks([...tasks, newTask])
+  }
     
   return(
  <div className="w-screen h-screen bg-slate-700 flex justify-center p-6">
-  <div className="w-[500px]"> 
+  <div className="w-[500px] space-y-4"> 
   <h1 className="text-3xl text-slate-100 font-bold text-center"> Task Management </h1>
-  
+  <AddTask  onAddTaskSubmit={onAddTaskSubmit} />
   <Tasks  tasks={tasks} onTaskClick={onTaskClick} onDeleteTaskClick={onDeleteTaskClick} />
-  <AddTask />
   </div>
  </div>
   )
