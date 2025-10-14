@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 
 function AddTask({onAddTaskSubmit}) {
    const [title, setTitle] = useState("");
@@ -10,6 +10,10 @@ function AddTask({onAddTaskSubmit}) {
     <input type="text" placeholder="Task Description" className="w-full p-2 rounded-md" value={description} onChange={(event) => setDescription(event.target.value)} />
 
     <button onClick={() => {
+        if(!title.trim() || !description.trim()) {
+            alert("Please fill in both fields");
+            return;
+        }
         onAddTaskSubmit(title,description)
         setTitle("")
         setDescription("")
